@@ -1,4 +1,5 @@
-<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns="sap.m" displayBlock="true" controllerName="opensap.myapp.controller.App">
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns="sap.m"
+	displayBlock="true" controllerName="opensap.myapp.controller.App">
 	<App>
 		<pages>
 			<Page title="openSAP - Developing with SAPUI5">
@@ -8,12 +9,16 @@
 							<IconTabFilter id="start" text="{i18n>gettingStartedFilter}">
 								<Carousel>
 									<pages>
-										<Image src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Wikipedia_Hello_World_Graphic.svg/2000px-Wikipedia_Hello_World_Graphic.svg.png" height="400px"/>
+										<Image
+											src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Wikipedia_Hello_World_Graphic.svg/2000px-Wikipedia_Hello_World_Graphic.svg.png"
+											height="400px"/>
 										<Image src="https://www.google.ru/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" height="100px"/>
 									</pages>
 								</Carousel>
 								<Button text="{i18n>showHelloButtonText}" press="onShowHello"/>
-								<Input value="{helloPanel>/recipient/name}" description="Hello {helloPanel>/recipient/name}" valueLiveUpdate="true" width="60%"/>
+								<Input
+									value="{ path: 'helloPanel>/recipient/amount', type: 'sap.ui.model.type.Float', formatOptions: {minFractionDigits: 2}, constraints: {maximum : 3000} }"
+									description="Hello {helloPanel>/recipient/name}" valueLiveUpdate="false" width="60%"/>
 							</IconTabFilter>
 							<IconTabFilter id="layouts" text="{i18n>layoutFilter}">
 								<MessageStrip type="Information" showIcon="true" text="Here's a Form Layout inside an Icon Tab Bar …"/>
@@ -48,7 +53,17 @@
 										<IconTabFilter text="{i18n>dataBindingFilter}" key="db">
 				<content><List headerText="{i18n>productListTitle}" items="{/ProductSet}">
 						<items>
-							<ObjectListItem title="{Name}" number="{Price}" intro="{ProductID}"/>
+							<ObjectListItem title="{Name}" number="{Price}" numberState="{= ${Price} > 500 ? 'Error' : 'Success'}" intro="{ProductID}">
+								<firstStatus>
+									<ObjectStatus text="{
+										parts: [
+											{path: 'WeightUnit'},
+											{path: 'WeightMeasure'}
+										],
+										formatter : '.formatter.delivery'
+									}"/>
+								</firstStatus>
+							</ObjectListItem>
 						</items>
 					</List>
 				</content>
@@ -59,5 +74,4 @@
 			</Page>
 		</pages>
 	</App>
-
 </mvc:View>
