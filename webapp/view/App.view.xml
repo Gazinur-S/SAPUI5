@@ -50,24 +50,26 @@
 									<Button text="{i18n>layoutDraftButton}" icon="sap-icon://save"/>
 								</Toolbar>
 							</IconTabFilter>
-										<IconTabFilter text="{i18n>dataBindingFilter}" key="db">
-				<content><List headerText="{i18n>productListTitle}" items="{/ProductSet}">
-						<items>
-							<ObjectListItem title="{Name}" number="{Price}" numberState="{= ${Price} > 500 ? 'Error' : 'Success'}" intro="{ProductID}">
-								<firstStatus>
-									<ObjectStatus text="{
-										parts: [
-											{path: 'WeightUnit'},
-											{path: 'WeightMeasure'}
-										],
-										formatter : '.formatter.delivery'
-									}"/>
-								</firstStatus>
-							</ObjectListItem>
-						</items>
-					</List>
-				</content>
-			</IconTabFilter>
+							<IconTabFilter text="{i18n>dataBindingFilter}" key="db">
+								<content>
+									<List id="productsList" items="{ path : '/ProductSet', sorter : { path : 'Category', group : true } }">
+										<headerToolbar>
+											<Toolbar>
+												<Title text="{i18n>productListTitle}"/>
+												<ToolbarSpacer/>
+												<SearchField width="50%" search="onFilterProducts"/>
+											</Toolbar>
+										</headerToolbar>
+										<items>
+											<ObjectListItem title="{Name}" number="{Price}" numberState="{= ${Price} > 500 ? 'Error' : 'Success'}" intro="{ProductID}">
+												<firstStatus>
+													<ObjectStatus text="{ parts: [ {path: 'WeightUnit'}, {path: 'WeightMeasure'} ], formatter : '.formatter.delivery' }"/>
+												</firstStatus>
+											</ObjectListItem>
+										</items>
+									</List>
+								</content>
+							</IconTabFilter>
 						</items>
 					</IconTabBar>
 				</content>
